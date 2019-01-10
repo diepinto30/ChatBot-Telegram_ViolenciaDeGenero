@@ -5,6 +5,8 @@ from telepot.loop import MessageLoop
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 
 
+
+
 def on_chat_message(msg):  # accion de comienzo
     content_type, chat_type, chat_id = telepot.glance(msg)
 
@@ -15,6 +17,8 @@ def on_chat_message(msg):  # accion de comienzo
 
     bot.sendMessage(chat_id, 'hola soy DiBot, ¿en qué te puedo ayudar?', reply_markup=keyboard)
     print(chat_id)
+    global idc
+    idc = chat_id
 
 
 def report_aggression(msg):  # def de reportes de violencia
@@ -26,8 +30,8 @@ def report_aggression(msg):  # def de reportes de violencia
                 [InlineKeyboardButton(text='Acto de violencia física 🥊👋', callback_data='pressA')],
                 [InlineKeyboardButton(text='Acto de violencia psicológica o verbal 🧠🗣👋', callback_data='pressA2')],
             ])
-        bot.sendMessage(648008717, '_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-')
-        bot.sendMessage(648008717, '¿Qué tipo de acto de violencia quiere reportar?', reply_markup=keyboard)
+        bot.sendMessage(idc, '_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-')
+        bot.sendMessage(idc, '¿Qué tipo de acto de violencia quiere reportar?', reply_markup=keyboard)
 
     if query_data == 'press2':
         bot.answerCallbackQuery(query_id, text='Usted a seleccionado la segunda opción')
@@ -35,17 +39,17 @@ def report_aggression(msg):  # def de reportes de violencia
             [InlineKeyboardButton(text='¿Qué hago cuando \npuedo ser agredida/o?', callback_data='pressV')],
             [InlineKeyboardButton(text='tengo que poner algo aqui pero nose', callback_data='pressV2')],
         ])
-        bot.sendMessage(648008717, '¿Qué tipo de acto de violencia quiere reportar?', reply_markup=keyboard)
+        bot.sendMessage(idc, '¿Qué tipo de acto de violencia quiere reportar?', reply_markup=keyboard)
 
     if query_data == 'pressV':
         print(query_data)
         print("dentro del pressV")
-        bot.sendMessage(648008717, 'vamos bien estoy aquí || pressV')
+        bot.sendMessage(idc, 'vamos bien estoy aquí || pressV')
     else:
         if query_data == 'pressV2':
             print(query_data)
             print("dentro del pressV2")
-            bot.sendMessage(648008717, 'vamos bien estoy aquí || pressV2')
+            bot.sendMessage(idc, 'vamos bien estoy aquí || pressV2')
 
     # def help_aggression():
     #     query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query2')
