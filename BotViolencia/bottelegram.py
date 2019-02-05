@@ -1,11 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import sys
 import time
 import telepot
 from telepot.loop import MessageLoop
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
-
-
-
 
 def on_chat_message(msg):  # accion de comienzo
     content_type, chat_type, chat_id = telepot.glance(msg)
@@ -15,10 +14,12 @@ def on_chat_message(msg):  # accion de comienzo
                    [InlineKeyboardButton(text='Ayuda continua 👋', callback_data='press2')],
                ])
 
-    bot.sendMessage(chat_id, 'hola soy DiBot, ¿en qué te puedo ayudar?', reply_markup=keyboard)
+    bot.sendMessage(chat_id, 'Hola soy Dibot un asistente virtual, ¿En qué te puedo ayudar?', reply_markup=keyboard)
     print(chat_id)
     global idc
     idc = chat_id
+    global text
+    text = content_type
 
 
 def report_aggression(msg):  # def de reportes de violencia
@@ -39,36 +40,88 @@ def report_aggression(msg):  # def de reportes de violencia
             [InlineKeyboardButton(text='¿Qué hago cuando \npuedo ser agredida/o?', callback_data='pressV')],
             [InlineKeyboardButton(text='tengo que poner algo aqui pero nose', callback_data='pressV2')],
         ])
-        bot.sendMessage(idc, '¿Qué tipo de acto de violencia quiere reportar?', reply_markup=keyboard)
+        bot.sendMessage(idc, '¿qqqqqqQué tipo de acto de violencia quiere reportar?', reply_markup=keyboard)
 
-    if query_data == 'pressV':
-        print(query_data)
-        print("dentro del pressV")
-        bot.sendMessage(idc, 'vamos bien estoy aquí || pressV')
-    else:
-        if query_data == 'pressV2':
-            print(query_data)
-            print("dentro del pressV2")
-            bot.sendMessage(idc, 'vamos bien estoy aquí || pressV2')
+    # Fisica
+    if query_data == 'pressA':
 
-    # def help_aggression():
-    #     query_id, from_id, query_data = telepot.glance(msg, flavor='callback_query2')
-    #     print('Callback Query:', query_id, from_id, query_data)
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text='Si.', callback_data='pressRVF')],
+            [InlineKeyboardButton(text='No.', callback_data='pressRVFNO')],
+        ])
+        bot.sendMessage(idc, 'Denunciar ahora el acto de violencia Física ...', reply_markup=keyboard)
 
-        # keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        #     [InlineKeyboardButton(text='Acto de violencia ', callback_data='pressA')],
-        #     [InlineKeyboardButton(text='Acto de violencia sss', callback_data='pressA2')],
-        # ])
-        # bot.sendMessage(chat_id, '¿Qué tipo de acto de violencia quiere reportar?', reply_markup=keyboard)
+
+    if query_data == 'pressRVF':
+        bot.sendMessage(idc, 'Su denuncia esta siendo procesada. Gracias por confiar en nosotros, DiBot estaré siempre cuando nos necesites.')
+        bot.sendMessage(idc, '_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-')
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text='🚨 Alerta de Violencia 🚨', callback_data='press')],
+            [InlineKeyboardButton(text='Ayuda continua 👋', callback_data='press2')],
+        ])
+
+        bot.sendMessage(idc, 'Hola soy Dibot un asistente virtual, ¿En qué te puedo ayudar?', reply_markup=keyboard)
+
+
+    if query_data == 'pressRVFNO':
+        bot.sendMessage(idc, 'Desea contactar con algún profesional para poder solucionar o que ahora le esta sucediendo.', reply_markup=keyboard)
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text='Me seria de mucha ayuda.', callback_data='pressme')],
+            [InlineKeyboardButton(text='En otro momento.', callback_data='pressrg1')],
+        ])
+
+    if query_data == 'pressme':
+        bot.sendMessage(idc, 'Desea contactar con algún profesional para poder solucionar o que ahora le esta sucediendo.', reply_markup=keyboard)
+        bot.sendMessage(idc, '_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-')
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text='Link', callback_data='press333')],
+            [InlineKeyboardButton(text='Regresar', callback_data='pressrg1')],
+        ])
+
+    if query_data == 'pressrg1':
+        bot.sendMessage(idc, '_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-')
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text='🚨 Alerta de Violencia 🚨', callback_data='press')],
+            [InlineKeyboardButton(text='Ayuda continua 👋', callback_data='press2')],
+        ])
+
+        bot.sendMessage(idc, 'Hola soy Dibot un asistente virtual, ¿En qué te puedo ayudar?', reply_markup=keyboard)
+
+
+    # Psicologica
+    if query_data == 'pressA2':
+
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text='Si.', callback_data='pressRVF2')],
+            [InlineKeyboardButton(text='No.', callback_data='pressRVFNO2')],
+        ])
+        bot.sendMessage(idc, 'Denunciar ahora el acto de violencia Psicologica o verbal ...', reply_markup=keyboard)
+
+
+    if query_data == 'pressRVF2':
+        bot.sendMessage(idc, 'Su denuncia esta siendo procesada. Gracias por confiar en nosotros, DiBot estaré siempre cuando nos necesites.')
+        bot.sendMessage(idc, '_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-')
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text='🚨 Alerta de Violencia 🚨', callback_data='press')],
+            [InlineKeyboardButton(text='Ayuda continua 👋', callback_data='press2')],
+        ])
+
+        bot.sendMessage(idc, 'Hola soy Dibot un asistente virtual, ¿En qué te puedo ayudar?', reply_markup=keyboard)
+
+
+    if query_data == 'pressRVFNO':
+        bot.sendMessage(idc, 'Desea contactar con algún profesional para poder solucionar o que ahora le esta sucediendo.', reply_markup=keyboard)
+        keyboard = InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text='Me seria de mucha ayuda.', callback_data='pressme')],
+            [InlineKeyboardButton(text='En otro momento.', callback_data='pressrg1')],
+        ])
 
 
 TOKEN = '597926382:AAFG5pqIpVmtVRUPR2DhQLQosh0DBmE3nB4'  # get token from command-line
 
 bot = telepot.Bot(TOKEN)
-MessageLoop(bot, {'chat': on_chat_message, 'callback_query': report_aggression, 'callback_query2': report_aggression}).run_as_thread()
+MessageLoop(bot, {'chat': on_chat_message, 'callback_query': report_aggression}).run_as_thread()
 print('Listening ...')
 
 while 1:
-    time.sleep(40)
-
-
+    time.sleep(10)
