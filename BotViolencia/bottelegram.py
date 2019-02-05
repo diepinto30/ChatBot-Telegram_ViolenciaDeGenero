@@ -117,7 +117,7 @@ def report_aggression(msg):  # def de reportes de violencia
         ])
 
 
-TOKEN = '597926382:AAFG5pqIpVmtVRUPR2DhQLQosh0DBmE3nB4'  # get token from command-line
+TOKEN = ''  # get token from command-line
 
 bot = telepot.Bot(TOKEN)
 MessageLoop(bot, {'chat': on_chat_message, 'callback_query': report_aggression}).run_as_thread()
